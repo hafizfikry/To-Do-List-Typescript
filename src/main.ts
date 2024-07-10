@@ -49,12 +49,26 @@ function renderTodos(filteredTodos: ToDo[] = todos) {
         listId.textContent = (index + 1).toString()
         listTask.textContent = `${todo.task}`
         listCategory.textContent = `${todo.category}`
+
+        if (todo.category === "meeting") {
+            listCategory.classList.add("text-primary-emphasis")
+        } else if (todo.category === "work") {
+            listCategory.classList.add("text-warning")
+        } else if (todo.category === "vacation") {
+            listCategory.classList.add("text-info")
+        }
+        
         listDaysleft.textContent = `${todo.dl} Days left`
+
+        listStatus.classList.add('btn')
+        listStatus.addEventListener('click', () => toogleCompleted(todo.id))
 
         if (todo.completed) {
             listStatus.textContent = `completed`
+            listStatus.classList.add('text-success')
         } else {
             listStatus.textContent = `not completed`
+            listStatus.classList.add('text-danger')
         }
         listAction.appendChild(buttonDelete(todo.id))
 
